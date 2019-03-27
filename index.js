@@ -5,21 +5,31 @@ const arr = [
 ];
 const organizar = data => data.sort((a, b) => (a - b));
 
-//media
 const getMedia = data => {
   let cont = 0;
-  data.forEach(number => parseInt(cont += number));
-  
+  data.forEach(number => cont += number);
+
   return (cont / data.length).toFixed(2);
 }
 
 const desvioMedio = data => {
   let soma = 0;
-  data.forEach(number => parseInt(soma += Math.abs(number - getMedia(arr))));
-  
+  data.forEach(number => soma += Math.abs(number - getMedia(data)));
+
   return (soma / data.length).toFixed(2);
 }
+
+const variancia = data => {
+  let soma = 0;
+  data.forEach(number => soma += Math.pow((number - getMedia(data)), 2))
+
+  return (soma / (data.length - 1)).toFixed(2);
+}
+
+const desvioPadrao = variancia => Math.sqrt(variancia).toFixed(2);
 
 console.log(`Rol: ${organizar(arr)}`);
 console.log(`Media: ${getMedia(arr)}`);
 console.log(`Desvio Medio: ${desvioMedio(arr)}`);
+console.log(`variancia: ${variancia(arr)}`);
+console.log(`desvio Padrao: ${desvioPadrao(variancia(arr))}`);
